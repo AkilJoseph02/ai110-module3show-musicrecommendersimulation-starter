@@ -27,6 +27,10 @@ Some prompts to answer:
 - How does your `Recommender` compute a score for each song
 - How do you choose which songs to recommend
 
+The music recommender will focus on 3 main features: genre, mood, and energy. I feel like these three are the most quantifiable aspects of music that can be filtered and categorized/enumerated (genre: blues, jazz, pop, etc; mood: happy, sad, romantic, etc; energy: 0-100). 
+
+UserProfile will have the following the info: Name, List of Favorite Songs (used to determine or assume what genre/mood/energy the user likes most), Favorite Artist (suggest other artists and their songs to the user based on the Favorite Artist's genres), and Favorite Genre.
+
 You can include a simple diagram or bullet list if helpful.
 
 ---
