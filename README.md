@@ -54,6 +54,10 @@ flowchart TD
 
 Potential Biases: Might be weighted moreso on genre.
 
+Screenshots of Terminal Output:
+![alt text](image.png)
+![alt text](image-1.png)
+
 You can include a simple diagram or bullet list if helpful.
 
 ---
