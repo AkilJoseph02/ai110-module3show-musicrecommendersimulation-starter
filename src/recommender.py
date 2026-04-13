@@ -88,38 +88,38 @@ def score_song(user_prefs: Dict, song: Dict) -> Tuple[float, str]:
     Required by tests/test_recommender.py
     """
     score = 0.0
-    reasoning_parts = []
+    reasoning = ""
     
     # Genre match: +2.0 points
     if song.get('genre', '').lower() == user_prefs.get('genre', '').lower():
         score += 2.0
-        reasoning_parts.append(f"+2.0 for genre match ({song['genre']})")
+        reasoning += f"+2.0 for genre match ({song['genre']})\n"
     else:
-        reasoning_parts.append(f"+0.0 genre mismatch (user: {user_prefs.get('genre')}, song: {song.get('genre')})")
+        reasoning += f"+0.0 genre mismatch (user: {user_prefs.get('genre')}, song: {song.get('genre')})\n"
     
     # Mood match: +1.0 point
     if song.get('mood', '').lower() == user_prefs.get('mood', '').lower():
         score += 1.0
-        reasoning_parts.append(f"+1.0 for mood match ({song['mood']})")
+        reasoning += f"+1.0 for mood match ({song['mood']})\n"
     else:
-        reasoning_parts.append(f"+0.0 mood mismatch (user: {user_prefs.get('mood')}, song: {song.get('mood')})")
+        reasoning += f"+0.0 mood mismatch (user: {user_prefs.get('mood')}, song: {song.get('mood')})\n"
     
     # Energy match: +(1.0 - abs(target_energy - song_energy))
     target_energy = user_prefs.get('energy', 0.5)
     song_energy = song.get('energy', 0.5)
     energy_score = 1.0 - abs(target_energy - song_energy)
     score += energy_score
-    reasoning_parts.append(f"+{energy_score:.2f} for energy match (target: {target_energy}, song: {song_energy})")
+    reasoning += f"+{energy_score:.2f} for energy match (target: {target_energy}, song: {song_energy})\n"
     
     # Acousticness match
     song_acousticness = song.get('acousticness', 0.5)
     if user_prefs.get('likes_acoustic', False):
         score += song_acousticness
-        reasoning_parts.append(f"+{song_acousticness:.2f} for acousticness (user likes acoustic)")
+        reasoning += f"+{song_acousticness:.2f} for acousticness (user likes acoustic)\n"
     else:
         acoustic_score = 1.0 - song_acousticness
         score += acoustic_score
-        reasoning_parts.append(f"+{acoustic_score:.2f} for low acousticness (user dislikes acoustic)")
+        reasoning += f"+{acoustic_score:.2f} for low acousticness (user dislikes acoustic)\n"
     
-    reasoning = "\n".join(reasoning_parts)
+    reasoning = reasoning.rstrip('\n')
     return score, reasoning
