@@ -40,6 +40,20 @@ Starting Recommendation Recipe:
 if "likes_acoustic" == true: +(song_acousticness), higher points if acoustics are high
 if "likes_acoustic" == false: +(1.0 - song_accousticness) higher points if acoustics are low
 
+FlowChart:
+flowchart TD
+    A[Input: User Prefs] --> B[Load CSV songs]
+    B --> C{More songs<br/>to process?}
+    C -->|Yes| D[Get next song]
+    D --> E[Calculate score<br/>using user prefs<br/>& scoring logic]
+    E --> F[Add to results]
+    F --> C
+    C -->|No| G[Sort by score]
+    G --> H[Output: Top K<br/>Recommendations]
+  (Screenshot of chart in the folder.)
+
+Potential Biases: Might be weighted moreso on genre.
+
 You can include a simple diagram or bullet list if helpful.
 
 ---
