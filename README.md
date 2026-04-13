@@ -31,6 +31,15 @@ The music recommender will focus on 3 main features: genre, mood, and energy. I 
 
 UserProfile will have the following the info: Name, List of Favorite Songs (used to determine or assume what genre/mood/energy the user likes most), Favorite Artist (suggest other artists and their songs to the user based on the Favorite Artist's genres), and Favorite Genre.
 
+Taste Profile: taste_profile = {"favorite_genre" = "Pop", "favorite_mood" = "chill", target_energy = 0.60, "likes_acoustic": true}
+
+Starting Recommendation Recipe:
++2.0 points for genre match
++1.0 point for mood match
++(1.0 - abs(target_energy - song_energy) ) for energy match
+if "likes_acoustic" == true: +(song_acousticness), higher points if acoustics are high
+if "likes_acoustic" == false: +(1.0 - song_accousticness) higher points if acoustics are low
+
 You can include a simple diagram or bullet list if helpful.
 
 ---
